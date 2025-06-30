@@ -143,4 +143,6 @@ JOIN Exam ON Course.course_id = Exam.course_id
 GROUP BY Course.course_id;
 
 17
-
+SELECT DISTINCT Student.first_name, Student.last_name
+FROM Student
+JOIN Exam ON Student.student_id 
