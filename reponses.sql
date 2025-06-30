@@ -70,3 +70,77 @@ ON  Exam.exam_id = Course.course_id;
 
 9 
 
+SELECT Student.first_name, Student.last_name, Course.course_name
+FROM Student
+LEFT JOIN  Course
+ON Student.course_id = Course.course_id
+
+UNION 
+
+SELECT Student.first_name, Student.last_name, Course.course_name
+FROM Student
+RIGHT JOIN  Course
+ON Student.course_id = Course.course_id;
+
+10 
+
+SELECT Student.first_name, Student.last_name, Exam.exam_type
+FROM Student
+LEFT JOIN  Exam
+ON Student.course_id = Exam.exam_id
+
+UNION 
+
+SELECT Student.first_name, Student.last_name, Exam.exam_type
+FROM Student
+RIGHT JOIN  Exam
+ON Student.course_id = Exam.exam_id
+WHERE Student.course_id IS NULL;
+
+-- Partie 5 – SELF JOIN
+
+11
+SELECT  student1.first_name AS student1, student2.first_name AS student2
+FROM Student AS student1
+JOIN Student AS student2
+ON student1.birth_year = student2.birth_year AND student1.student_id > student2.student_id;
+
+12
+
+SELECT  student1.first_name AS student1, student2.first_name AS student2
+FROM Student AS student1
+JOIN Student AS student2
+ON student1.birth_year > student2.birth_year;
+
+-- Partie 6 – CROSS JOIN
+
+13 
+SELECT  Student.first_name, Student.last_name, Exam.exam_type
+FROM Student
+CROSS JOIN Exam;
+
+14
+
+COUNT Student.first_name, Student.last_name, Exam.exam_type
+FROM Student
+CROSS JOIN Exam;
+
+-- Partie 7 – Aggrégations
+
+15
+
+SELECT student1.first_name, student1.last_name AVG(Exam.score) 
+FROM student1 
+JOIN Exam ON student1.student_id = Exam.student_id
+GROUP BY student1.student_id; 
+
+16
+
+SELECT Course.course_name 
+MAX(Exam.score)
+FROM Course
+JOIN Exam ON Course.course_id = Exam.course_id
+GROUP BY Course.course_id;
+
+17
+
